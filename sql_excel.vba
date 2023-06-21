@@ -153,3 +153,44 @@ Sub QueryAndInsertData()
     
 End Sub
 
+Sub CompleteTasks()
+
+    ' Call Upload, execute remote script with plink, and call QueryAndInsertData
+    
+    ' Call the Upload subroutine to upload data to Teradata
+    Call Upload
+    
+    ' Execute the remote script using plink synchronously and wait for it to finish
+    Call ExecuteRemoteScriptSync
+    
+    ' Call the QueryAndInsertData subroutine to query data from Teradata and insert into worksheet
+    Call QueryAndInsertData
+    
+    ' Inform the user that the tasks are completed
+    MsgBox "All tasks completed."
+
+End Sub
+
+Sub Upload()
+    ' Your Upload subroutine code here
+End Sub
+
+Sub ExecuteRemoteScriptSync()
+    ' Execute the remote script synchronously using plink and wait for it to finish
+    Dim plinkCommand As String
+    Dim waitOnReturn As Boolean
+    
+    ' Set the plink command and wait on return
+    plinkCommand = "plink.exe -ssh username@hostname -pw password -m script.txt"
+    waitOnReturn = True
+    
+    ' Execute the plink command synchronously and wait for it to finish
+    Shell plinkCommand, vbNormalFocus
+    Do While Shell("cmd /c echo", vbHide) <> 0
+        DoEvents
+    Loop
+End Sub
+
+Sub QueryAndInsertData()
+    ' Your QueryAndInsertData subroutine code here
+End Sub
