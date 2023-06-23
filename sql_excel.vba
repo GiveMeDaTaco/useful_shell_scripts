@@ -194,3 +194,42 @@ End Sub
 Sub QueryAndInsertData()
     ' Your QueryAndInsertData subroutine code here
 End Sub
+
+
+Sub CheckDataValidation()
+
+    Dim wsSource As Worksheet
+    Dim wsTarget As Worksheet
+    Dim rng As Range
+    Dim cell As Range
+    Dim ErrorMsg As String
+    
+    ' Define the source and target worksheets
+    Set wsSource = ThisWorkbook.Sheets("Sheet1")
+    Set wsTarget = ThisWorkbook.Sheets("Sheet2")
+    
+    ' Define the error message
+    ErrorMsg = "Your specific error message"
+    
+    ' Define the range to be checked
+    Set rng = wsSource.Range("A1:A" & wsSource.Cells(wsSource.Rows.Count, "A").End(xlUp).Row)
+    
+    ' Initialize the row number for the target worksheet
+    nextRow = wsTarget.Cells(wsTarget.Rows.Count, "A").End(xlUp).Row + 1
+    
+    ' Check each cell in the range
+    For Each cell In rng
+        On Error Resume Next
+        ' If data validation fails
+        If cell.Validation.Value = False Then
+            ' Write the cell address and error message to the target worksheet
+            wsTarget.Cells(nextRow, "A").Value = cell.Address
+            wsTarget.Cells(nextRow, "B").Value = ErrorMsg
+            ' Move to the next row in the target worksheet
+            nextRow = nextRow + 1
+        End If
+        On Error GoTo 0
+    Next cell
+
+End Sub
+
