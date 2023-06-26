@@ -233,3 +233,43 @@ Sub CheckDataValidation()
 
 End Sub
 
+Sub ValidateColumns()
+    Dim col As Range
+    Dim col2 As Range
+    Set col = Range("J:J")
+    Set col2 = Range("K:K")
+
+    ' Determine the last filled row
+    Dim lastRow As Long
+    lastRow = Application.WorksheetFunction.Max(col.Cells.SpecialCells(xlCellTypeLastCell).Row, col2.Cells.SpecialCells(xlCellTypeLastCell).Row)
+    
+    ' Get the last row of the CorrectionsNeeded sheet
+    Dim correctionsRow As Long
+    correctionsRow = Sheets("CorrectionsNeeded").Cells(Rows.Count, "A").End(xlUp).Row + 1
+
+    Dim i As Long
+    For i = 2 To lastRow ' Start from row 2 to ignore the header
+        ' Set current cell in col and corresponding cell in col2
+        Dim cell As Range
+        Set cell = col.Cells(i)
+        Dim otherCell As Range
+        Set otherCell = col2.Cells(i)
+        
+        ' Replace blank cells with 0
+        If IsEmpty(cell.Value) Then cell.Value = 0
+        If IsEmpty(otherCell.Value) Then otherCell.Value = 0
+
+        ' Now enforce the data validation
+        If otherCell.Value = 0 Then
+            If cell.Value <= 0 Then
+                ' Write to CorrectionsNeeded
+                Sheets("CorrectionsNeeded").Cells(correctionsRow, "A").Value = cell.Value & "," & otherCell.Value ' Cell values
+                Sheets("CorrectionsNeeded").Cells(correctionsRow, "B").Value = cell.Address & "," & otherCell.Address ' Cell addresses
+                Sheets("CorrectionsNeeded").Cells(correctionsRow, "C").Value = "ErrorCode" ' Replace with your actual error code
+                correctionsRow = correctionsRow + 1
+            End If
+        End If
+    Next i
+End Sub
+
+
