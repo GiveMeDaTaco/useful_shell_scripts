@@ -1,0 +1,34 @@
+In the realm of data, so vast and wide,
+Where tables and rows diligently abide,
+On Halloween night, the queries took flight,
+In search of treats, oh what a sight!
+
+SELECT * FROM houses WHERE candy = 'lots';
+SQL whispered softly, connecting the dots.
+INNER JOIN giggles ON laughter = true,
+Bringing joy and sweets for me and you.
+
+SAS chimed in with a PROC SQL cheer,
+"Let’s analyze candy, from far and near!
+SUM, COUNT, AVG, let’s find the mean,
+On this spooky night, let’s set the scene."
+
+DATA costumes; SET fun_disguises;
+RUN; with laughter, as the sun rises.
+WHERE mask = 'spooky' AND cape = 'long',
+We'll GROUP BY treats, oh nothing could go wrong.
+
+LEFT JOIN witches ON brooms = 'fast',
+RIGHT JOIN ghosts, a spectral cast.
+FULL JOIN pumpkins ON porches aglow,
+In the database of Halloween, the data flow.
+
+INDEXED BY the twinkle in each eye,
+PARTITIONED BY the stars in the sky.
+The datasets danced, free and alive,
+On Halloween night, they'd surely thrive.
+
+So here's to SQL, SAS, and all the data fun,
+On Halloween night, when the queries run.
+May your joins be smooth and your datasets clean,
+Happy Halloween to all, on this data scene!
