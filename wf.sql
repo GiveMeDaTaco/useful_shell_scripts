@@ -26,3 +26,18 @@ GROUP BY
     wf.sortbad
 ORDER BY 
     wf.sortbad;
+
+WITH RankedData AS (
+  SELECT sortbad, identifier1, identifier2,
+         DENSE_RANK() OVER (ORDER BY sortbad) AS rank
+  FROM user_work.waterfall
+)
+SELECT sortbad,
+       SUM(CASE WHEN rank = sortbad THEN 1 ELSE 0 END) AS identifier1_dropped,
+       COUNT(DISTINCT identifier1) FILTER (WHERE rank = 1) AS identifier1_remaining,
+       SUM(CASE WHEN rank = sortbad THEN 1 ELSE 0 END) AS identifier2_dropped,
+       COUNT(DISTINCT CONCAT(identifier1, ':', identifier2)) FILTER (WHERE rank = 1) AS identifier2_remaining
+FROM RankedData
+GROUP BY sortbad
+ORDER BY sortbad;
+
