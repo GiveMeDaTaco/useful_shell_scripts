@@ -1,6 +1,7 @@
 import os
 import json
 import sys
+import argparse
 
 def index_directory(directory):
     index = {'directories': {}, 'files': []}
@@ -22,8 +23,7 @@ def index_directory(directory):
             current_dict[d] = {'directories': {}, 'files': []}
         
         for f in files:
-            current_dict_files = current_dict
-            current_dict_files['files'].append(f)
+            current_dict['files'].append(f)
         
         total_dirs += len(dirs)
         total_files += len(files)
@@ -38,13 +38,19 @@ def save_index_to_json(index, output_file):
     with open(output_file, 'w') as f:
         json.dump(index, f, indent=4)
 
-if __name__ == '__main__':
-    network_drive_path = r'\\networked_drive_path'  # Replace with your actual network drive path
-    output_file = 'network_drive_index.json'
-
+def main():
+    parser = argparse.ArgumentParser(description="Index a networked drive and save the structure to a JSON file.")
+    parser.add_argument("network_drive_path", help="The path to the networked drive to index.")
+    parser.add_argument("output_file", help="The output JSON file to save the index.")
+    
+    args = parser.parse_args()
+    
     # Create an index of the network drive
-    index = index_directory(network_drive_path)
+    index = index_directory(args.network_drive_path)
     # Save the index to a JSON file
-    save_index_to_json(index, output_file)
+    save_index_to_json(index, args.output_file)
 
-    print(f'\nIndex saved to {output_file}')
+    print(f'\nIndex saved to {args.output_file}')
+
+if __name__ == '__main__':
+    main()
