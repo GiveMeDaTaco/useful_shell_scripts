@@ -7,9 +7,9 @@ Core Modules
 .. toctree::
    :maxdepth: 1
 
-   tlptaco/output
-   tlptaco/waterfall
-   tlptaco/eligibility
+   tlptaco_output
+   tlptaco_waterfall
+   tlptaco_eligibility
 
 Frontend Modules
 ----------------
@@ -17,7 +17,7 @@ Frontend Modules
 .. toctree::
    :maxdepth: 1
 
-   tlptaco/process
+   tlptaco_process
 
 Tool Modules
 ------------
@@ -25,9 +25,9 @@ Tool Modules
 .. toctree::
    :maxdepth: 1
 
-   tlptaco/connections
-   tlptaco/tools
-   tlptaco/logging
+   tlptaco_connections
+   tlptaco_tools
+   tlptaco_logging
 
 Backend Modules
 ---------------
@@ -35,6 +35,6 @@ Backend Modules
 .. toctree::
    :maxdepth: 1
 
-   tlptaco/cleanup
-   tlptaco/validations
-   tlptaco/construct_sql
+   tlptaco_cleanup
+   tlptaco_validations
+   tlptaco_construct_sql
